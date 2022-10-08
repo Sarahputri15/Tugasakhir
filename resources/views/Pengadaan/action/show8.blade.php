@@ -1,0 +1,1 @@
+<iframe height="100%" width ="100%" src="{{ URL::asset('file_pengadaan/'.$rencanaan->dokumen_perpajakan) }}" frameborder="0"></iframe>

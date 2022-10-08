@@ -1,0 +1,13 @@
+a, ul, li{
+    text-decoration:none
+}
+.gambar {
+    background-color: url(4.jpeg);
+}
+
+.zindex {
+    z-index: 5;
+}
+
+
+
