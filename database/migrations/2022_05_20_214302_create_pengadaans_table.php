@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('nilai_sp2d')->nullable();
             $table->string('dokumen_perpajakan')->nullable();
             $table->string('Dokumen_Judul')->nullable();
+            $table->string('Resume_kontrak')->nullable();
             $table->string('Adendum')->nullable();
             $table->string('NPWP')->nullable();
             $table->string('Dokumen_Rekening')->nullable();
