@@ -9,7 +9,6 @@ use App\Models\Notif;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Events\OrderStatusUpdated;
- 
 
 //controller role keuangan
 class KeuanganController extends Controller
