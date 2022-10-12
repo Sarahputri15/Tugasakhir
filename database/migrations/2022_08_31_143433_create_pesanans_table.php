@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('judul');
             $table->string('status')->nullable()->default('Belum disetujui');
             $table->string('catatan')->nullable();
+            $table->string('dok_pesanan')->nullable();
             $table->string('dok_penawaran')->nullable();
             $table->timestamps();
         });
