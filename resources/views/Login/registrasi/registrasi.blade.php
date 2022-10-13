@@ -5,7 +5,7 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <main class="form-registrasi">
-            <form  action="{{ url('/register') }}" method="post">
+            <form  action="{{ url('/register2') }}" method="post">
               @csrf
               <img class="mb-3 rounded mx-auto d-block" src="/gambar/Lambang_ITK.png" alt="" width="72" height="75">
               <h1 class="h3 mb-3 fw-normal text-center" style="color:white">Registrasi Akun</h1>
