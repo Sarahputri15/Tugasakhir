@@ -202,9 +202,15 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/Logout', [LoginController::class, 'logout']);
 
+Route::get('/register', [LoginController::class, 'register']);
+
+Route::post('/register', [LoginController::class, 'store']);
+
+
+// Route master admin
 Route::middleware('auth')->group(function ()
 {
-// Route master admin
+
 Route::get('User', [LoginController::class, 'index2']);
 
 Route::get('register', [LoginController::class, 'register']);
