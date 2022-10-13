@@ -202,9 +202,9 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/Logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [LoginController::class, 'register2']);
+Route::get('/register2', [LoginController::class, 'register2']);
 
-Route::post('/register', [LoginController::class, 'store']);
+Route::post('/register2', [LoginController::class, 'store']);
 
 
 // Route master admin
