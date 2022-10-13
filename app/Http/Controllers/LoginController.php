@@ -74,6 +74,14 @@ class LoginController extends Controller
         return back()->with('error', 'Login Gagal');
     }
 
+    //jika ingin memunculkan halaman register di halaman login...
+    public function register2()
+    {
+        $data['title'] = 'Registrasi Akun';
+        $data['admins'] = Admin::all();
+        return view('Login.registrasi.registrasi', $data);
+    }
+
     //Halaman tambah data
     public function register()
     {
