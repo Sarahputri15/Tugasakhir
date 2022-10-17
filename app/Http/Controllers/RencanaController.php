@@ -202,6 +202,7 @@ class RencanaController extends Controller
         $data['years'] = Tahun::all();
         $data['dokumens'] = Dokumen::find($request->id=2);
         return view('Perencanaan.action.create2', $data);
+        
     }
 
     //tambah data RKKS
