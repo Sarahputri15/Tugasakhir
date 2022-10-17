@@ -50,7 +50,7 @@ class RencanaController extends Controller
         $namafile = '';
         if($request->hasFile('dokumen')) {
             $file = $request->file('dokumen');
-            $namafile = round(microtime(true)).'.'.$file->getClientOriginalExtension();
+            $namafile = 'DIPA'.round(microtime(true)).'.'.$file->getClientOriginalExtension();
             $file->move(public_path('file_perencanaan'), $namafile);
         }
         Perencanaan::create([
@@ -108,7 +108,7 @@ class RencanaController extends Controller
         if($request->hasFile('dokumen')) {
             $file = $request->file('dokumen');
             $namafile = 'DIPA'.round(microtime(true)).'.'.$file->getClientOriginalExtension();
-            $file->move('file_perencanaan', $namafile);
+            $file->move(public_path('file_perencanaan'), $namafile);
             $perencanaan->dokumen = $namafile; 
         }
         $perencanaan->save();
@@ -186,7 +186,6 @@ class RencanaController extends Controller
     }
 
     //pengaturan notif
-
     public function index3() 
     {
         $data['title'] = 'RKKS';
@@ -202,7 +201,7 @@ class RencanaController extends Controller
         $data['years'] = Tahun::all();
         $data['dokumens'] = Dokumen::find($request->id=2);
         return view('Perencanaan.action.create2', $data);
-        
+
     }
 
     //tambah data RKKS
@@ -266,8 +265,8 @@ class RencanaController extends Controller
        // $perencanaan->tanggal_upload = $request->upload;
         if($request->hasFile('dokumen')) {
             $file = $request->file('dokumen');
-            $namafile = round(microtime(true)).'.'.$file->getClientOriginalExtension();
-            $file->move('file_perencanaan', $namafile);
+            $namafile = 'RKKS'.round(microtime(true)).'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('file_perencanaan'), $namafile);
             $perencanaan->dokumen = $namafile;
         }
         $perencanaan->save();
