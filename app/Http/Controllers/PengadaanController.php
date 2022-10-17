@@ -23,6 +23,9 @@ class PengadaanController extends Controller
         $sum_pekerjaan = Pengadaan::all()->where('tahun_id', Auth::user()->login_as)->sum('realisasi_pekerjaan');
         $pekerjaan = Pengadaan::all()->where('tahun_id', Auth::user()->login_as)->count();
         $data['pekerjaan'] = $sum_pekerjaan/$pekerjaan;
+        if( $sum_pekerjaan/$pekerjaan == 0 ){
+            $data['pekerjaan'] = $sum_pekerjaan/$pekerjaan;
+        }
         $pembayaran = pengadaan::all()->where('tahun_id', Auth::user()->login_as);
         $hitung = 0;
         foreach($pembayaran as $p)
