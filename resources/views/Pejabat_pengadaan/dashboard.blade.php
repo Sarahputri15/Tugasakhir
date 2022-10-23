@@ -28,7 +28,11 @@
               <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $p->judul }}</td>
-                <td>{{ $p->status }}</td>
+                @if($p->status == 'Belum disetujui')
+                <td><span class="badge text-bg-danger">{{ $p->status}}</span></td>
+                @else
+                <td><span class="badge text-bg-success">{{ $p->status}}</span></td>
+                @endif
                 <td>{!! $p->catatan !!}</td>
               </tr>
               @endforeach
