@@ -2,7 +2,7 @@
 
 @section('container')
 <div class="row my-3 justify-content-start">
-    <div class="col-2 card text-bg-success mx-3" style="max-width: 15rem; height:140px">
+    <div class="col-2 card text-bg-secondary mx-3" style="max-width: 15rem; height:140px">
         <div class="card-header">Total Data</div>
         <div class="card-body">
           <h6 class="card-title">Surat Pesanan:</h6>
