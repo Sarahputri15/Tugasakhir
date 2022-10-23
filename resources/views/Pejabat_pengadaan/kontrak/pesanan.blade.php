@@ -29,7 +29,11 @@
           <th>{{ $loop->iteration }}</th>
           <td>{{ $p->judul }}</td>
           <td>{{ $p->updated_at }}</td>
-          <td>{{ $p->status }}</td>
+          @if($p->status == 'Belum disetujui')
+          <td><span class="badge text-bg-danger">{{ $p->status}}</span></td>
+          @else
+          <td><span class="badge text-bg-success">{{ $p->status}}</span></td>
+          @endif
           <td>
             <a href="{{ url('pesanan/show/'.$p->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           </td>
