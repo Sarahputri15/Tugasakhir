@@ -17,5 +17,19 @@
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
     </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(#icon-click).click(function(){
+          $(#icon).toggleClass(bi bi-eye-slash);
+
+          const input = (#pass);
+          if(input.attr("type")  === "password"){
+            input.attr("type", "text");
+          }else{
+            input.attr("type", "password");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

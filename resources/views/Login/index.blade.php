@@ -43,7 +43,7 @@
         <div class="form-floating">
           <div class="form-group input-group">
             <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required>
-            <div class="input-group-prepend" style="border-radius: -100%">
+            <div class="input-group-prepend">
               <div class="input-group-text">
                 <a href="#" class="text-dark" id="icon-click">
                   <i class="bi bi-eye" id="icon"></i>
@@ -52,8 +52,6 @@
             </div>
           </div>
         </div>
-
-        
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
       </form>
       <small class="d-block text-center mt-3" style="color:white">Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
