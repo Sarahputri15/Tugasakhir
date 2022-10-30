@@ -40,10 +40,19 @@
           </select>
           <label for="admin">Tahun Anggaran</label>
         </div>
-        <div class="form-floating">
-          <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required><span class="glyphicon glyphicon-eye-open" aria-hidden="true"><i class="bi bi-eye"></i></span>
-          <label for="floatingPassword">Password</label>
+        <div class="form-group input-group">
+          <div class="form-floating">
+            <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required>
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <a href="#" class="text-dark" id="icon-click">
+                  <i class="bi bi-eye" id="icon"></i>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
+
         
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
       </form>
