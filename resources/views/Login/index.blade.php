@@ -40,8 +40,8 @@
           </select>
           <label for="admin">Tahun Anggaran</label>
         </div>
-        <div class="form-group input-group">
-          <div class="form-floating">
+        <div class="form-floating">
+          <div class="form-group input-group">
             <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required>
             <div class="input-group-prepend">
               <div class="input-group-text">
