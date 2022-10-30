@@ -22,7 +22,7 @@
         $(#icon-click).click(function(){
           $(#icon).toggleClass(bi bi-eye-slash);
 
-          const input = (#pass);
+          var input = (#pass);
           if(input.attr("type")  === "password"){
             input.attr("type", "text");
           }else{
