@@ -62,6 +62,7 @@
               </div>
               <button class="w-100 btn btn-lg btn-primary my-3" type="submit">Register</button>
             </form>
+            <small class="d-block text-center mt-3" style="color:white">Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
             <small class="d-block text-center mt-3" style="color:white">Sudah Register? <a href="{{ url('/Login') }}">Login Sekarang</a></small>
         </main>
     </div>
