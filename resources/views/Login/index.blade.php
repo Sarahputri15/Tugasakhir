@@ -38,16 +38,16 @@
             <option value="{{ $y->id }}">{{ $y->years }}</option>
             @endforeach
           </select>
-          <label for="admin">Tahun Pengadaan</label>
+          <label for="admin">Tahun Anggaran</label>
         </div>
         <div class="form-floating">
-          <input name="password" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+          <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required><span class="glyphicon glyphicon-eye-open" aria-hidden="true"><i class="bi bi-eye"></i></span>
           <label for="floatingPassword">Password</label>
         </div>
         
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
       </form>
-      <!--<small class="d-block text-center mt-3" style="color:white">Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>-->
+      <small class="d-block text-center mt-3" style="color:white">Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
     </main>
   </div>
 </div>
