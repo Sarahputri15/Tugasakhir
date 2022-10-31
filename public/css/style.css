@@ -10,7 +10,7 @@ a, ul, li{
 }
 
 nav a:visited{
-    background-color: azure;
+    color: azure;
 }
 
 
