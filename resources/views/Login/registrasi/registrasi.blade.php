@@ -10,7 +10,7 @@
               <img class="mb-3 rounded mx-auto d-block" src="/gambar/Lambang_ITK.png" alt="" width="72" height="75">
               <h1 class="h3 mb-3 fw-normal text-center" style="color:white">Registrasi Akun</h1>
               <div class="form-floating">
-                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name') }}">
+                <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name') }}" required>
                 <label for="name">Nama</label>
                 @error('name')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -19,7 +19,7 @@
                 @enderror
               </div>
               <div class="form-floating">
-                <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" placeholder="nip" value="{{ old('nip') }}">
+                <input type="text" name="nip" class="form-control @error('nip') is-invalid @enderror" id="nip" placeholder="nip" value="{{ old('nip') }}" required>
                 <label for="nip">NIP/NIPH</label>
                 @error('nip')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -55,7 +55,7 @@
                 <label for="admin">Mendaftar Sebagai</label>
               </div>
               <div class="form-floating">
-                <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password">
+                <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
                 <label for="password">Password</label>
                 @error('password')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
