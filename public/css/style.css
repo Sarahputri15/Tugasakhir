@@ -9,7 +9,7 @@ a, ul, li{
     z-index: 5;
 }
 
-nav a:visited{
+.navbar a:visited{
     color: azure;
 }
 
