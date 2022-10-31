@@ -45,7 +45,7 @@
             <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required>
             <div class="input-group-prepend">
               <div class="input-group-text">
-                <a href="javascript:;" class="text-dark" id="icon-click">
+                <a href="javascript:;" class="text-dark" id="click">
                   <i class="bi bi-eye" id="icon"></i>
                 </a>
               </div>

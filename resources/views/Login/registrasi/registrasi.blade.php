@@ -40,9 +40,10 @@
               </div>
               <div class="form-floating">
                 <select class="form-select @error('Admin_id') is-invalid @enderror" name="Admin_id" aria-label="Default select example" id="admin" value=" {{ old('admin') }}">
-                  @foreach($admins as $admin)
-                  <option value={{ $admin->id }}>{{ $admin->admin }}</option>
-                  @endforeach
+                  <option value={{ $admins->id=1 }}>Rumpun Perencanaan</option>
+                  <option value={{ $admins->id=2 }}>Pejabat Pembuat Komitmen</option>
+                  <option value={{ $admins->id=3 }}>Keuangan dan BMN</option>
+                  <option value={{ $admins->id=4 }}>Pejabat Pengadaan</option>
                   @error('Admin_id')
                   <div id="validationServerUsernameFeedback" class="invalid-feedback">
                       Posisi admin harap diisi terlebih dahulu

@@ -19,7 +19,7 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $(#icon-click).click(function(){
+        $(#click).click(function(){
           $(#icon).toggleClass(bi bi-eye-slash);
 
           var input = (#pass);
