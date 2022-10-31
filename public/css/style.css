@@ -9,5 +9,9 @@ a, ul, li{
     z-index: 5;
 }
 
+nav a:visited{
+    background-color: azure;
+}
+
 
 

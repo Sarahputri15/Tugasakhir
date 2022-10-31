@@ -32,9 +32,3 @@ body {
   border-radius: 0;
   margin-bottom:-1px;
 }
-
-.input-group-text{
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
