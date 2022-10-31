@@ -39,18 +39,10 @@
                 @endif 
               </div>
               <div class="form-floating">
-                <select class="form-select {{-- @error('Admin_id') is-invalid @enderror --}}" name="Admin_id" aria-label="Default select example" id="admin" value=" {{ old('admin') }}" required>
-                  <option value={{ $admins->id=1 }}>Rumpun Perencanaan</option>
-                  <option value={{ $admins->id=2 }}>Pejabat Pembuat Komitmen</option>
-                  <option value={{ $admins->id=3 }}>Keuangan dan BMN</option>
-                  <option value={{ $admins->id=4 }}>Pejabat Pengadaan</option>
-                  {{-- 
-                  @error('Admin_id')
-                  <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                      Posisi admin harap diisi terlebih dahulu
-                  </div>
-                  @enderror
-                     --}}
+                <select class="form-select" name="Admin_id" aria-label="Default select example" id="tahun" value="">
+                  @foreach($admins as $a)
+                  <option value="{{ $a->id }}">{{ $a->admin }}</option>
+                  @endforeach
                 </select>
                 <label for="admin">Mendaftar Sebagai</label>
               </div>
