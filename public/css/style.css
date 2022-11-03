@@ -9,7 +9,7 @@ a, ul, li{
     z-index: 5;
 }
 
-a:visited {
+a:active {
     color:pink;
 }
 
