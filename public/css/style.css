@@ -10,10 +10,6 @@ a, ul, li{
 }
 
 a:link{
-    color:azure;
-}
-
-a:visited {
     color:yellow;
 }
 
