@@ -9,9 +9,8 @@ a, ul, li{
     z-index: 5;
 }
 
-.navbar a:visited{
-    color: azure;
+a:visited {
+    color:pink;
 }
-
 
 

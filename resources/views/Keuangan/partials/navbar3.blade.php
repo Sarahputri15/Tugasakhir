@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item dropdown ">
-            <a class="nav-link " href="{{ url('/Home/Pembayarankeu1') }}" >Persiapan Kontrak</a>
+            <a class="nav-link" href="{{ url('/Home/Pembayarankeu1') }}" >Persiapan Kontrak</a>
           </li>
         </ul>
       </div>
