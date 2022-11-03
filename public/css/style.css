@@ -9,8 +9,14 @@ a, ul, li{
     z-index: 5;
 }
 
+a:link{
+    color:azure;
+}
+
 a:visited {
     color:yellow;
 }
+
+
 
 
