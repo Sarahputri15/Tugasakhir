@@ -40,7 +40,7 @@ class RencanaController extends Controller
     public function create(Request $request)
     {
         $data['title'] = 'DIPA';
-        $data['years'] = Tahun::all(); 
+        $data['years'] = Auth::user()->login_as; 
         $data['dokumens'] = Dokumen::find($request->id=1);
         return view('Perencanaan.action.create', $data);
     }
@@ -198,7 +198,7 @@ class RencanaController extends Controller
     public function create2(Request $request)
     {
         $data['title'] = 'RKKS';
-        $data['years'] = Tahun::all();
+        $data['years'] = Auth::user()->login_as;
         $data['dokumens'] = Dokumen::find($request->id=2);
         return view('Perencanaan.action.create2', $data);
 

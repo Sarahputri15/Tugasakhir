@@ -18,7 +18,7 @@ use App\Http\Controllers\PesananController;
 */
 
 // route perencanaan
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     //Dashboard
     Route::get('Dashboard', [RencanaController::class, 'dashboard']);
@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function ()
 });
 
 // route PPK
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     //dashboard
     Route::get('/Dashboard_Pengadaan',[PengadaanController::class, 'dashboard']);
@@ -146,12 +146,17 @@ Route::middleware('auth')->group(function ()
 });
 
 // route keuangan
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     //Dashboard
     Route::get('/Dashboard_Keuangan',[KeuanganController::class, 'dashboard']);
 
     //persiapan pengadaan
+    Route::get('/Home/DIPA3', [KeuanganController::class, 'index2']);
+
+    Route::get('/Home/DIPA3/show/{id}', [KeuanganController::class, 'showDipa']);
+
+    //pelaksanaan kontrak
     Route::get('/Home/Pembayarankeu1', [KeuanganController::class, 'index']);
 
     Route::get('/Home/Pembayarankeu1/Edit/{id}', [KeuanganController::class, 'edit']);
@@ -168,7 +173,7 @@ Route::middleware('auth')->group(function ()
 });
 
 // route pejabat pengadaan
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
     //dashboard
     Route::get('Dashboard_pejabatPengadaan', [PesananController::class, 'dashboard']);
@@ -206,9 +211,12 @@ Route::get('/register2', [LoginController::class, 'register2']);
 
 Route::post('/register2', [LoginController::class, 'store']);
 
+Route::get('password.reset', [LoginController::class, 'verifikasi']);
+
+Route::post('password.reset', [LoginController::class, 'verifikasi2'])->name('password.reset');
 
 // Route master admin
-Route::middleware('auth')->group(function ()
+Route::middleware('auth', 'verified')->group(function ()
 {
 
 Route::get('User', [LoginController::class, 'index2']);

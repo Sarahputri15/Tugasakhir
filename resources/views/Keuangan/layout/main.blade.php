@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
-</head>
+  </head>
   <body>
     @auth
     <div class="row zindex" style="height:55px;">
@@ -66,7 +66,7 @@
               for(i=0; i<notif.length; i++)
               {
                 isi += "<li><a class='dropdown-item'>"+notif[i]['name']+" "+notif[i]['deskripsi']+" | "+notif[i]['created_at']+"</li></a>";
-                console.log(notif[i]["deskripsi"]);
+                console.log(notif[i]);
               }
               document.getElementById('isinotif').innerHTML=isi;
             }

@@ -7,7 +7,7 @@
 <form action="{{ url('pesanan/edit') }}" method="post" enctype="multipart/form-data">
   @csrf
   <input type="hidden" name="id" value="{{ $pesanan->id }}">
-  <div class="mb-3">
+  <div class="mb-3 visually-hidden-focusable">
       <label for="tahun" class="form-label">Tahun Pengadaan</label>
       <select class="form-select" name="tahun" aria-label="Default select example" id="tahun">
         @foreach($years as $y)

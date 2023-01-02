@@ -7,12 +7,10 @@
 </div>
 <form action="{{ url('/Home/Pembayaran1') }}" method="post" enctype="multipart/form-data"> 
   @csrf
-    <div class="mb-3">
+    <div class="mb-3 visually-hidden-focusable">
       <label for="tahun" class="form-label">Tahun Pengadaan</label>
       <select class="form-select" name="tahun" aria-label="Default select example" id="tahun" value="">
-        @foreach($years as $y)
-        <option value="{{ $y->id }}">{{ $y->years }}</option>
-        @endforeach
+        <option value="{{ $years }}">{{ Bantuan::get_tahun(Auth::user()->id) }}</option>
       </select>
     </div>
 

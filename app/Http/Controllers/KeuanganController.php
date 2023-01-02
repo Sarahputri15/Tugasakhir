@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pengadaan;
+use App\Models\Perencanaan;
 use App\Models\Tahun;
 use App\Models\Notif;
 use Carbon\Carbon;
@@ -31,7 +32,7 @@ class KeuanganController extends Controller
               }
           }
       }
-      $sum_pembayaran = Pengadaan::all()->sum('realisasi_pembayaran');
+      $data['pembayaran'] = Pengadaan::all()->sum('realisasi_pembayaran');
       $data['pembayaran'] = $hitung;
       $data['current'] = Carbon::now();
       $data['title'] = 'Dashboard';
@@ -118,6 +119,21 @@ class KeuanganController extends Controller
             $data['title'] = 'Persiapan Kontrak';
             $data['keuangan'] = Pengadaan::where('id', $id)->first();
             return view('Keuangan.Detail.pengadaan.pengesahan',$data);
+        }
+
+        public function index2() 
+        {
+            $data['title']='DIPA';
+            $data['keuangans'] = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->select('perencanaans.id','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', Auth::user()->login_as)->get();
+            $data['years'] = Tahun::all();
+            return view('Keuangan.perencanaan.dipa',$data);
+        }
+
+        public function showDipa($id) 
+        {
+            $data['title'] = 'DIPA';
+            $data['rencanaan'] = Perencanaan::where('id', $id)->first();
+            return view('Keuangan.action.showDipa', $data);
         }
 
 }

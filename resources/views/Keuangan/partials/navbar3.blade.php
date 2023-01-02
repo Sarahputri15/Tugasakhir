@@ -6,6 +6,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
+              Persiapan Pengadaan
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark bg-success">
+              <li><a class="dropdown-item" href="{{ url('/Home/DIPA3') }}">DIPA</a></li>
+            </ul>
+          </li>
           <li class="nav-item dropdown ">
             <a class="nav-link" href="{{ url('/Home/Pembayarankeu1') }}" >Persiapan Kontrak</a>
           </li>
@@ -26,4 +34,4 @@
         <button class="navbar-brand bg-primary border-0" href="{{ url('/Login') }}">Logout <i class="bi bi-door-closed"></i></button>
       </form>
     </div>
-  </nav>
+</nav>

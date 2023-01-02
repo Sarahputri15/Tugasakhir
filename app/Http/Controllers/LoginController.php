@@ -8,6 +8,10 @@ use App\Models\User;
 use App\Models\Tahun;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 //Controller Master Admin
 class LoginController extends Controller
@@ -140,5 +144,25 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
     
         return redirect('/Login');
+    }
+
+    //Verifikasi email
+    public function verifikasi()
+    {
+        $data['title'] = 'Verifikasi Email';
+        return view('Login.reset_password.Verifikasi', $data);
+    }
+
+    public function verifikasi2(Request $request)
+    {
+        $request->validate(['email' => 'required|email|exists:users,email']);
+ 
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+     
+        return $status === Password::RESET_LINK_SENT
+                    ? back()->with(['status' => __($status)])
+                    : back()->withErrors(['email' => __($status)]);
     }
 }

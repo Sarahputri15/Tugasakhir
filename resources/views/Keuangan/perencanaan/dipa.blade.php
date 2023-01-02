@@ -1,4 +1,4 @@
-@extends('Pengadaan.layout.main')
+@extends('Keuangan.layout.main')
 
 @section('container')
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom container">
@@ -34,15 +34,15 @@
         </tr>
       </thead>
       <tbody>
-        @foreach ($perencanaan as $rencana)
+        @foreach ($keuangans as $k)
         <tr>
           <th>{{ $loop->iteration }}</th>
-          <td>{{ $rencana->dokumen}}</td>
-          <td>{{ $rencana->edisi }}</td>
-          <td>{{ $rencana->updated_at }}</td>
-          <td>{{ $rencana->tanggal_pengesahan }}</td>
+          <td>{{ $k->dokumen}}</td>
+          <td>{{ $k->edisi }}</td>
+          <td>{{ $k->updated_at }}</td>
+          <td>{{ $k->tanggal_pengesahan }}</td>
           <td>
-            <a href="{{ url('/Home/DIPA2/show/'.$rencana->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
+            <a href="{{ url('/Home/DIPA3/show/'.$rencana->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           </td>
         </tr>
         @endforeach

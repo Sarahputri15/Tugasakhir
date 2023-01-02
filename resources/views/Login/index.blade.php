@@ -51,13 +51,13 @@
               </div>
             </div>
           </div>
-          <label for="floatingPassword">Password</label>
+          {{-- <label for="floatingPassword">Password</label> --}}
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
       </form>
-      <small class="d-block text-center mt-3" style="color:white">Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
     </main>
   </div>
+  <small class="d-block text-center mt-3" style="color:white; width: 100%">Lupa Password? <a href="{{ url('password.reset') }}"> Silahkan Ubah Password Sekarang </a>| Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
 </div>
 
 @endsection

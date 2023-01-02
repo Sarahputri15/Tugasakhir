@@ -41,6 +41,7 @@
               <div class="form-floating">
                 <select class="form-select" name="Admin_id" aria-label="Default select example" id="tahun" value="">
                   @foreach($admins as $a)
+                  <option>--Pilih Posisi Admin--</option>
                   <option value="{{ $a->id }}">{{ $a->admin }}</option>
                   @endforeach
                 </select>

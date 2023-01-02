@@ -98,7 +98,7 @@ class PengadaanController extends Controller
     public function create2()
     {
         $data['title'] = 'Usulan Pemaketan PBJ';
-        $data['years'] = Tahun::all();
+        $data['years'] = Auth::user()->login_as;
         return view('Pengadaan.action.create2', $data);
     }
 
@@ -180,7 +180,7 @@ class PengadaanController extends Controller
     {
         $data['title'] = 'Usulan Pemaketan PBJ';
         $data['paket'] = pbj::where('id', $id)->first(); 
-        $data['years'] = Tahun::all();
+        $data['years'] = Auth::user()->login_as;
         return view('Pengadaan.action.edit3', $data);
     }
 
@@ -393,7 +393,7 @@ class PengadaanController extends Controller
     //Halaman tambah data
     public function create() {
         $data['title'] = 'Persiapan Kontrak';
-        $data['years'] = Tahun::all();
+        $data['years'] = Auth::user()->login_as;
         return view('Pengadaan.action.create', $data);
     }
 
@@ -402,7 +402,7 @@ class PengadaanController extends Controller
     {
         $data['edit'] = Pengadaan::where('id', $id)->first();
         $data['title'] = 'Persiapan Kontrak';
-        $data['years'] = Tahun::all();
+        $data['years'] = Auth::user()->login_as;
         return view('Pengadaan.action.edit',$data);
     }
 

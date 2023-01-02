@@ -27,7 +27,7 @@ class PesananController extends Controller
 
     public function create() {
       $data['title'] = 'Surat Pesanan';
-      $data['years'] = Tahun::all();
+      $data['years'] = Auth::user()->login_as;
       return view('Pejabat_pengadaan.action.create', $data);
     }
 
