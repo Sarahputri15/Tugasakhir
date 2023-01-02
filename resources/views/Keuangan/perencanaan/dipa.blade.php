@@ -42,7 +42,7 @@
           <td>{{ $k->updated_at }}</td>
           <td>{{ $k->tanggal_pengesahan }}</td>
           <td>
-            <a href="{{ url('/Home/DIPA3/show/'.$rencana->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
+            <a href="{{ url('/Home/DIPA3/show/'.$k->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           </td>
         </tr>
         @endforeach

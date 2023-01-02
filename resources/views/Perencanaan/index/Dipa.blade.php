@@ -10,6 +10,7 @@
   </div>
 </div>
 <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  {{-- 
   <div class="row mb-2 pb-2 border-bottom">
     <div class="col-2">
     </div>
@@ -24,6 +25,7 @@
     <div class="col-3">
     </div>
   </div>
+    --}}
   <table class="table table-striped table-sm table-bordered" id="myTable">
     <thead>
       <tr>
