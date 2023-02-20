@@ -24,7 +24,7 @@
     
     <div class="mb-3">
       <label for="admin" class="form-label">Mendaftar Sebagai</label>
-      <select class="form-select" name="Admin_id" aria-label="Default select example" id="tahun">
+      <select class="form-select" name="AdminId" aria-label="Default select example" id="tahun">
         @foreach($admins as $a)
         <option value="{{ $a->id }}" 
             @if($a->id == $user->Admin_id)

@@ -5,10 +5,10 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <main class="form-registrasi">
-            <form  action="{{ url('/register2') }}" method="post">
+          <img class="mb-3 rounded mx-auto d-block" src="/gambar/Lambang_ITK.png" alt="" width="72" height="75">
+          <h1 class="h3 mb-3 fw-normal text-center" style="color:white">Registrasi Akun</h1>
+            <form  action="{{ url('registrasi') }}" method="post">
               @csrf
-              <img class="mb-3 rounded mx-auto d-block" src="/gambar/Lambang_ITK.png" alt="" width="72" height="75">
-              <h1 class="h3 mb-3 fw-normal text-center" style="color:white">Registrasi Akun</h1>
               <div class="form-floating">
                 <input type="text" name="name" class="form-control rounded-top @error('name') is-invalid @enderror" id="name" placeholder="Name" value="{{ old('name') }}" required>
                 <label for="name">Nama</label>
@@ -28,25 +28,16 @@
                 @enderror 
               </div>
               <div class="form-floating">
-                <input required type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" value="{{ old('email') }}">
+                <input required type="email" name="email" class="form-control" id="email" placeholder="Email" value="{{ old('email') }}">
                 <label for="email">Email</label>
-                @if($errors->any())
-                @error('email')
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    Email sudah digunakan
-                </div>
-                @enderror
-                @endif 
               </div>
-              <div class="form-floating">
-                <select class="form-select" name="Admin_id" aria-label="Default select example" id="tahun" value="">
-                  <option>--Pilih Posisi Admin--</option>
-                  @foreach($admins as $a)
-                  <option value="{{ $a->id }}">{{ $a->admin }}</option>
-                  @endforeach
-                </select>
-                <label for="admin">Mendaftar Sebagai</label>
-              </div>
+              <select class="form-select" name="AdminId" aria-label="Default select example">
+                <option selected>--Pilih Posisi Admin--</option>
+                <option value="{{ $admins->id=1 }}">Koordinator Rumpun Perencanaan</option>
+                <option value="{{ $admins->id=2 }}">Pejabat Pembuat Komitmen</option>
+                <option value="{{ $admins->id=3 }}">Keuangan dan BMN</option>
+                <option value="{{ $admins->id=4 }}">Pejabat Pengadaan</option>
+              </select>
               <div class="form-floating">
                 <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
                 <label for="password">Password</label>

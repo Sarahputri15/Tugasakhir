@@ -6,6 +6,8 @@ use App\Http\Controllers\RencanaController;
 use App\Http\Controllers\KeuanganController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\MasterController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -209,7 +211,7 @@ Route::post('/Logout', [LoginController::class, 'logout']);
 
 Route::get('/register2', [LoginController::class, 'register2']);
 
-Route::post('/register2', [LoginController::class, 'store']);
+Route::post('registrasi', [LoginController::class, 'store']);
 
 Route::get('password.forgot', [LoginController::class, 'verifikasi']);
 
@@ -219,19 +221,21 @@ Route::get('password.reset/{token}', [LoginController::class, 'new_password'])->
 
 Route::post('password.reset', [LoginController::class, 'new_password2']);
 
+
+
 // Route master admin
 Route::middleware('auth')->group(function ()
 {
 
-Route::get('User', [LoginController::class, 'index2']);
+Route::get('User', [MasterController::class, 'index2']);
 
-Route::get('register', [LoginController::class, 'register']);
+Route::get('register', [MasterController::class, 'register']);
 
-Route::post('register', [LoginController::class, 'store2']);
+Route::post('register', [MasterController::class, 'store']);
 
-Route::get('user/hapus/{id}', [LoginController::class, 'delete']);
+Route::get('user/hapus/{id}', [MasterController::class, 'delete']);
 
-Route::get('user/edit/{id}', [LoginController::class, 'edit']);
+Route::get('user/edit/{id}', [MasterController::class, 'edit']);
 
-Route::post('user/edit', [LoginController::class, 'edit2']);
+Route::post('user/edit', [MasterController::class, 'edit2']);
 });

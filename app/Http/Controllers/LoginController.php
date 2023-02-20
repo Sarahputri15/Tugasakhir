@@ -9,8 +9,6 @@ use App\Models\Tahun;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -18,25 +16,6 @@ use Illuminate\Support\Facades\Mail;
 //Controller Master Admin
 class LoginController extends Controller
 {
-    //Halaman Data User
-    public function index2() 
-    {
-        $data['user'] = User::join('admins','users.Admin_id', '=', 'admins.id')
-                        ->select('users.id', 'users.name', 'users.nip', 'users.email', 'admins.admin', 'users.password')
-                        ->get();
-        $data['title'] = 'Data User';
-        $data['sum'] = User::all()->count();
-        return view('KeyAdmin.User.user', $data);
-    }
-
-    //Hapus Data
-    public function delete($id)
-    {
-        User::where('id',$id)->delete();
-
-        return redirect('User');
-    }
-
     //Halaman Login
     public function index() 
     {
@@ -58,16 +37,16 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
             $admin = User::where('email',$request->email)->first();
-            if($admin->Admin_id==1){
+            if($admin->AdminId==1){
                 return redirect()->intended('/Dashboard');
             }
-            else if($admin->Admin_id==2){
+            else if($admin->AdminId==2){
                 return redirect()->intended('/Dashboard_Pengadaan');
 
-            }else if($admin->Admin_id==3){
+            }else if($admin->AdminId==3){
                 return redirect()->intended('/Dashboard_Keuangan');
                 
-            }else if($admin->Admin_id==4){
+            }else if($admin->AdminId==4){
                 return redirect()->intended('Dashboard_pejabatPengadaan');
                 
             }else{
@@ -85,14 +64,6 @@ class LoginController extends Controller
         return view('Login.registrasi.registrasi', $data);
     }
 
-    //Halaman tambah data
-    public function register()
-    {
-        $data['title'] = 'Tambah Data';
-        $data['admins'] = Admin::all();
-        return view('KeyAdmin.Action.create', $data);
-    }
-
     //Tambah data
     public function store(Request $request)
     {
@@ -100,37 +71,15 @@ class LoginController extends Controller
             'name' => 'required|min:5',
             'nip' => 'required|min:5',
             'email' => 'required|email:dns|unique:users',
-            'Admin_id' => 'required',
+            'AdminId' => 'required',
             'password' => 'required',
         ]);
 
         $validate['password'] = Hash::make($validate['password']);
 
         User::create($validate);
-        return redirect('User');
-    }
-
-    //Halaman edit data
-    public function edit($id)
-    {
-        $data['title'] = "Edit data";
-        $data['user'] = User::where('id', $id)->first();
-        $data['admins'] = Admin::all();
-        return view('KeyAdmin.Action.edit', $data);
-    }
-    
-    //Edit Data
-    public function edit2(Request $request)
-    {
-        $edit = User::find($request->id);
-            $edit->name = $request->name;
-            $edit->nip = $request->nip;
-            $edit->email = $request->email;
-            $edit->Admin_id = $request->Admin_id;
-            $edit->password = Hash::make($request->password);
-
-            $edit->save();
-        return redirect('User');
+        
+        return redirect('/Login')->with('status', 'Registrasi Sukses, Silahkan Login');
     }
 
     //logout
@@ -168,7 +117,7 @@ class LoginController extends Controller
         $body = "We are received a request to reset the password for <b>SIMPBJ</b> account associated with ".$request->email.". You can reset your password by clicking the link below";
 
         Mail::send('Login.Email_forgot',['action_link'=>$action_link,'body'=>$body], function($message) use ($request){
-            $message->from('noreply@example.com','SIMPBJ');
+            $message->from('noreply@example.com ','SIMPBJ');
             $message->to($request->email,'Your name')
                     ->subject('Reset Password');
       });
