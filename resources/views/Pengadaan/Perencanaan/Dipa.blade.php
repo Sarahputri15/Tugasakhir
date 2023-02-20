@@ -26,8 +26,8 @@
           <th scope="col">no</th>
           <th scope="col">Dokumen</th>
           <th scope="col">Edisi</th>
-          <th scope="col">Tanggal Upload</th>
           <th scope="col">Tanggal Pengesahan</th>
+          <th scope="col">Tahun Pengadaan</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -37,8 +37,8 @@
           <th>{{ $loop->iteration }}</th>
           <td>{{ $rencana->dokumen}}</td>
           <td>{{ $rencana->edisi }}</td>
-          <td>{{ $rencana->updated_at }}</td>
           <td>{{ $rencana->tanggal_pengesahan }}</td>
+          <td>{{ $rencana->years }}</td>
           <td>
             <a href="{{ url('/Home/DIPA2/show/'.$rencana->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           </td>

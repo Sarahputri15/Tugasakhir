@@ -25,8 +25,8 @@
           <th scope="col">no</th>
           <th scope="col">Dokumen</th>
           <th scope="col">Edisi</th>
-          <th scope="col">Tanggal Upload</th>
           <th scope="col">Tanggal Pengesahan</th>
+          <th scope="col">Tahun Pengadaan</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -36,8 +36,8 @@
           <th>{{ $loop->iteration }}</th>
           <td>{{ $k->dokumen}}</td>
           <td>{{ $k->edisi }}</td>
-          <td>{{ $k->updated_at }}</td>
           <td>{{ $k->tanggal_pengesahan }}</td>
+          <td>{{ $k->years }}</td>
           <td>
             <a href="{{ url('/Home/DIPA3/show/'.$k->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           </td>

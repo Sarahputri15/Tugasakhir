@@ -12,7 +12,7 @@
   </form>
 </div>
 <br>
-<div class="justify-content-cennter flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom container-fluid" style="margin-left: -70px">
+<div class="justify-content-cennter flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 <table class="table table-striped table-sm table-bordered" id="myTable">
     <thead>
       <tr>
