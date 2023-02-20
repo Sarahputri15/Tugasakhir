@@ -9,6 +9,7 @@ use App\Models\Notif;
 use App\Models\Tahun;
 use Illuminate\Support\Facades\Auth;
 use App\Events\OrderStatusUpdated;
+use Carbon\Carbon;
 
 //controller role user perencanaan
 class RencanaController extends Controller
@@ -17,31 +18,35 @@ class RencanaController extends Controller
     public function dashboard()
     {
         $data['title'] = 'Dashboard';
-        $data['pbj'] = pbj::latest()->where('tahun_id', Auth::user()->login_as)->get();
+        $data['pbj'] = pbj::latest()->get();
         $data['notif2'] = Notif::all();
-        $data['hitung1'] = Perencanaan::where('dokumen_id','=', 1)->where('tahun_id', Auth::user()->login_as)->count();
-        $data['hitung2'] = Perencanaan::where('dokumen_id','=', 2)->where('tahun_id', Auth::user()->login_as)->count();
-        $data['hitung5'] = Pbj::all()->where('tahun_id', Auth::user()->login_as)->count();
+        $data['hitung1'] = Perencanaan::where('dokumen_id','=', 1)->count();
+        $data['hitung2'] = Perencanaan::where('dokumen_id','=', 2)->count();
+        $data['hitung5'] = Pbj::all()->count();
         return view('Perencanaan.index.dashboard', $data);
     }
 
     //Tampilan halaman DIPA
-    public function index() 
+    public function index(Request $request) 
     {
-        $search = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id');
+        $search = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->join('tahuns','perencanaans.tahun_id','=','tahuns.id');
         $data['title'] = 'DIPA';
         $data['years'] = Tahun::all();
-        $data['perencanaan'] = $search->select('perencanaans.id','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', Auth::user()->login_as)->orderBy('perencanaans.updated_at', 'DESC')->get();
+        $data['perencanaan'] = $search->select('perencanaans.id','tahuns.years','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->orderBy('perencanaans.updated_at', 'DESC')->get();
+
+        if ($request->years) {
+            $data['perencanaan'] = $search->select('perencanaans.id', 'tahuns.years', 'dokumens.dokumen', 'edisi', 'perencanaans.updated_at', 'tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', $request->years)->orderBy('perencanaans.updated_at', 'DESC')->get();
+        }
+
         return view('Perencanaan.index.Dipa', $data);
-        
     }
 
     //halaman tambah data DIPA
     public function create(Request $request)
     {
         $data['title'] = 'DIPA';
-        $data['years'] = Auth::user()->login_as; 
-        $data['dokumens'] = Dokumen::find($request->id=1);
+        $data['years'] = Tahun::all();
+        $data['dokumens'] = Dokumen::find($request->id = 1);
         return view('Perencanaan.action.create', $data);
     }
 
@@ -121,12 +126,21 @@ class RencanaController extends Controller
     }
 
     //tampilan halaman pbj(perencanaan)
-    public function index2() 
+    public function index2(Request $request) 
     {
         $data['title'] = 'Daftar Usulan PBJ';
-        $data['pbj'] = pbj::latest()->where('tahun_id', Auth::user()->login_as)->get();
-        $data['notif2'] = Notif::all();
+        $data['pbj'] = pbj::latest()->get();
         $data['years'] = Tahun::all();
+        $date = Carbon::now()->format('Y-m-d');
+
+        if ($request->date) {
+            $data['pbj'] = pbj::when($request->date !== Null, function ($q) use ($request) {
+                return $q->whereDate('created_at', $request->date);
+            }, function ($q) use ($date) {
+                return $q->whereDate('created_at', $date);
+            })->get();
+        }
+
         return view('Perencanaan.index.pbj', $data);
     }
 
@@ -181,16 +195,21 @@ class RencanaController extends Controller
     public function print() 
     {
         $data['title'] = 'Data PBJ';
-        $data['pbj'] = pbj::where('tahun_id', Auth::user()->login_as)->get();
+        $data['pbj'] = pbj::latest();
         return view('Perencanaan.index.print', $data);
     }
 
-    //pengaturan notif
-    public function index3() 
+    //Halaman RKKS
+    public function index3(Request $request) 
     {
+        $search = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->join('tahuns','perencanaans.tahun_id','=','tahuns.id');
         $data['title'] = 'RKKS';
         $data['years'] = Tahun::all();
-        $data['perencanaan'] = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->select('perencanaans.id','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 2)->orderBy('perencanaans.updated_at', 'DESC')->get();
+        $data['perencanaan'] = $search->select('perencanaans.id','tahuns.years','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 2)->orderBy('perencanaans.updated_at', 'DESC')->get();
+
+        if ($request->years ) {
+            $data['perencanaan'] = $search->select('perencanaans.id', 'tahuns.years', 'dokumens.dokumen', 'edisi', 'perencanaans.updated_at', 'tanggal_pengesahan')->where('dokumens.id', '=', 2)->where('tahun_id', $request->years)->orderBy('perencanaans.updated_at', 'DESC')->get();
+        }
         return view('Perencanaan.index.RKKS', $data);
     }
 
@@ -198,7 +217,7 @@ class RencanaController extends Controller
     public function create2(Request $request)
     {
         $data['title'] = 'RKKS';
-        $data['years'] = Auth::user()->login_as;
+        $data['years'] = Tahun::all();
         $data['dokumens'] = Dokumen::find($request->id=2);
         return view('Perencanaan.action.create2', $data);
 

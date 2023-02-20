@@ -5,12 +5,13 @@
 <div class="row justify-content-center">
     <div class="col-md-4">
         <main class="form-registrasi">
-            <form  action="{{ url('/register2') }}" method="post">
+            <form  action="{{ url('password.reset')}}" method="post" autocomplete="off">
               @csrf
+              <input type="hidden" name="token" value="{{ $token }}">
               <img class="mb-3 rounded mx-auto d-block" src="/gambar/Lambang_ITK.png" alt="" width="72" height="75">
               <h1 class="h3 mb-3 fw-normal text-center" style="color:white">Ubah Password</h1>
               <div class="form-floating">
-                <input required type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Email" value="{{ old('email') }}">
+                <input required type="email" name="email" class="form-control rounded-top @error('email') is-invalid @enderror" id="email" placeholder="Email" value="{{ $email ?? old('email') }}">
                 <label for="email">Email</label>
                 @if($errors->any())
                 @error('email')
@@ -21,7 +22,7 @@
                 @endif 
               </div>
               <div class="form-floating">
-                <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
+                <input type="password" name="password" class="form-control rounded-0 @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
                 <label for="password">Password</label>
                 @error('password')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -30,7 +31,7 @@
                 @enderror
               </div>
               <div class="form-floating">
-                <input type="password" name="password" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
+                <input type="password" name="password_confirmation" class="form-control rounded-bottom @error('password') is-invalid @enderror" id="password" placeholder="Password" required>
                 <label for="password">Password Baru</label>
                 @error('password')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">

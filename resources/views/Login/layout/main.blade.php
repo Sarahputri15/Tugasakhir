@@ -17,19 +17,24 @@
     <script
       src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous">
     </script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $(#click).click(function(){
-          $(#icon).toggleClass(bi bi-eye-slash);
+    <script>
+      const show = document.getElementById("pass-icon");
+      show.addEventListener("click", toggleShow);
 
-          var input = (#pass);
-          if(input.attr("type")  === "password"){
-            input.attr("type", "text");
-          }else{
-            input.attr("type", "password");
-          }
-        });
-      });
+      function toggleShow()
+      {
+        const passwordInput = document.getElementById("pass");
+
+        if(passwordInput.type === "password")
+        {
+          passwordInput.type = "text";
+          passwordInput.style = "margin-bottom: 10px; border-radius: 0 0 0 5px; border-left: 0px;";
+        }
+        else{
+          passwordInput.type = "password";
+          passwordInput.style = "border-right: 0px";
+        }
+      }
     </script>
   </body>
 </html>

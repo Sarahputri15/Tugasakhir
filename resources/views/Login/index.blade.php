@@ -11,6 +11,13 @@
     </div>
     @endif
 
+    @if(session()->has('info'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ session('info') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     @if(session()->has('error'))
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
       {{ session('error') }}
@@ -33,21 +40,11 @@
           @enderror
         </div>
         <div class="form-floating">
-          <select class="form-select" name="tahun" aria-label="Default select example" id="admin" style="border-radius: 0%">
-            @foreach($years as $y)
-            <option value="{{ $y->id }}">{{ $y->years }}</option>
-            @endforeach
-          </select>
-          <label for="admin">Tahun Anggaran</label>
-        </div>
-        <div class="form-floating">
           <div class="form-group input-group">
-            <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required>
+            <input name="password" type="password" class="form-control" id="pass" placeholder="Password" required style="border-right: 0px; hight:60px">
             <div class="input-group-prepend">
-              <div class="input-group-text" style="border-radius: 0 0 5px 0">
-                <a href="#" class="text-dark" id="click">
-                  <i class="bi bi-eye" id="icon"></i>
-                </a>
+              <div class="input-group-text bg-white" style="border-radius: 0 0 5px 0;  border-left: 0px">
+                <i class="bi bi-eye text-dark pass-icon" id="pass-icon"></i>
               </div>
             </div>
           </div>
@@ -57,7 +54,6 @@
       </form>
     </main>
   </div>
-  <small class="d-block text-center mt-3" style="color:white; width: 100%">Lupa Password? <a href="{{ url('password.reset') }}"> Silahkan Ubah Password Sekarang </a>| Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
+  <small class="d-block text-center mt-3" style="color:white; width: 100%">Lupa Password? <a href="{{ url('password.forgot') }}"> Silahkan ubah password sekarang </a>| Belum Register? <a href="{{ url('/register2') }}">Silahkan register sekarang</a></small>
 </div>
-
 @endsection

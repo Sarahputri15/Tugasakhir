@@ -6,10 +6,13 @@
 </div>
 <form action="{{ url('/Home/DIPA') }}" method="post" enctype="multipart/form-data">
   @csrf
-  <div class="mb-3 visually-hidden-focusable">
+  <div class="mb-3">
     <label for="tahun" class="form-label">Tahun Pengadaan</label>
-    <select class="form-select" name="tahun" aria-label="Default select example" id="tahun" value="">
-      <option value="{{ $years }}">{{ Bantuan::get_tahun(Auth::user()->id) }}</option>
+    <select class="form-select @error('tahun') is-invalid @enderror" name="tahun" aria-label="Default select example" id="tahun" value="" required>
+      <option value="">-- Pilih Tahun --</option>
+      @foreach($years as $y)
+      <option value="{{ $y->id }}" {{ Request::get('tahun') == $y->id ? 'selected':'' }}>{{ $y->years }}</option>
+      @endforeach
     </select>
   </div>
 

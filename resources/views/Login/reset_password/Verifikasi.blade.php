@@ -4,9 +4,9 @@
 
 <div class="row justify-content-center">
   <div class="col-md-4">
-    @if(session()->has('status'))
+    @if(session()->has('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('status') }}
+      {{ session('success') }}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
@@ -23,7 +23,7 @@
     <div class="card">
       <div class="card-body">
         <main class="form-signin">
-          <form action="{{ url('password.reset') }}" method="post">
+          <form action="{{ url('password.forgot') }}" method="post">
             @csrf
             <div class="form-floating">
               <input name="email" type="email" class="form-control @error('email') is-invalid @enderror" id="floatingInput" placeholder="name@example.com" required value="{{ old('email') }}" style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px">

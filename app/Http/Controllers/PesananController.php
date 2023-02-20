@@ -8,12 +8,23 @@ use App\Models\Tahun;
 use App\Models\Notif;
 use Illuminate\Support\Facades\Auth;
 use App\Events\OrderStatusUpdated;
+use Carbon\Carbon;
+
 class PesananController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $data['title'] = 'Surat Pesanan';
         $data['years'] = Tahun::all();
-        $data['pesanan'] = Pesanan::latest()->where('tahun_id', Auth::user()->login_as)->get();
+        $data['pesanan'] = Pesanan::latest()->get();
+        $date = Carbon::now()->format('Y-m-d');
+
+        if($request->date){
+            $data['pesanan'] = Pesanan::when($request->date !== Null, function ($q) use ($request) {
+                return $q->whereDate('created_at', $request->date);
+            }, function($q) use ($date ){
+                return $q->whereDate('created_at', $date );
+            })->get();
+        }
         return view('Pejabat_pengadaan.kontrak.pesanan', $data);
     }
 
@@ -27,7 +38,7 @@ class PesananController extends Controller
 
     public function create() {
       $data['title'] = 'Surat Pesanan';
-      $data['years'] = Auth::user()->login_as;
+      $data['years'] = Tahun::all();
       return view('Pejabat_pengadaan.action.create', $data);
     }
 
@@ -72,7 +83,6 @@ class PesananController extends Controller
     public function edit2(Request $request)
     {
         $edit = Pesanan::find($request->id);
-        $edit->tahun_id = $request->tahun;
         $edit->judul = $request->judul;
         if($request->hasFile('penawaran')) {
             $file = $request->file('penawaran');
@@ -100,8 +110,8 @@ class PesananController extends Controller
     public function dashboard() 
     {
         $data['title'] = 'Dashboard';
-        $data['hitung4'] = Pesanan::all()->where('tahun_id', Auth::user()->login_as)->count();
-        $data['pesanan'] = Pesanan::all()->where('tahun_id', Auth::user()->login_as);
+        $data['hitung4'] = Pesanan::all()->count();
+        $data['pesanan'] = Pesanan::all();
         return view('Pejabat_pengadaan.dashboard', $data);
     }
 

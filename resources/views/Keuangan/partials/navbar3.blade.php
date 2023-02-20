@@ -1,21 +1,21 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="width: 100%; height:55px">
     <div class="container">
-      <a class="navbar-brand" href="{{ url('/Dashboard_Keuangan') }}">Dashboard</a>
+      <a class="navbar-brand " href="{{ url('/Dashboard_Keuangan') }}">Dashboard</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav navv">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle {{Request::is('Home/DIPA3*') ?'active':''}}" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
               Persiapan Pengadaan
             </a>
             <ul class="dropdown-menu dropdown-menu-dark bg-success">
               <li><a class="dropdown-item" href="{{ url('/Home/DIPA3') }}">DIPA</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown ">
-            <a class="nav-link" href="{{ url('/Home/Pembayarankeu1') }}" >Persiapan Kontrak</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link {{Request::is('Home/Pembayarankeu1*') ?'active':''}}" href="{{ url('/Home/Pembayarankeu1') }}" >Persiapan Kontrak</a>
           </li>
         </ul>
       </div>
@@ -29,7 +29,7 @@
           </ul>
         </li>
       </ul>
-      <form class="nav-link active" style="margin-right:-1.8%" action="/Logout" method="post">
+      <form class="nav-link " style="margin-right:-1.8%" action="/Logout" method="post">
         @csrf
         <button class="navbar-brand bg-primary border-0" href="{{ url('/Login') }}">Logout <i class="bi bi-door-closed"></i></button>
       </form>

@@ -20,7 +20,7 @@ class KeuanganController extends Controller
       $sum_pekerjaan = Pengadaan::all()->sum('realisasi_pekerjaan');
       $pekerjaan = Pengadaan::all()->count();
       $data['pekerjaan'] = $sum_pekerjaan/$pekerjaan;
-      $pembayaran = pengadaan::all()->where('tahun_id', Auth::user()->login_as);
+      $pembayaran = pengadaan::all();
       $hitung = 0;
       foreach($pembayaran as $p)
       {
@@ -36,17 +36,26 @@ class KeuanganController extends Controller
       $data['pembayaran'] = $hitung;
       $data['current'] = Carbon::now();
       $data['title'] = 'Dashboard';
-      $data['keuangans'] = Pengadaan::latest()->where('tahun_id', Auth::user()->login_as)->get();
-      $data['hitung3'] = Pengadaan::all()->where('tahun_id', Auth::user()->login_as)->count();
+      $data['keuangans'] = Pengadaan::latest()->get();
+      $data['hitung3'] = Pengadaan::all()->count();
       return view('Keuangan.dashboard.dashboard', $data);
     }
 
         //Halaman persiapan kontrak
-        public function index() 
+        public function index(Request  $request) 
         {
             $data['title']='Persiapan Kontrak';
-            $data['keuangans'] = Pengadaan::latest()->where('tahun_id', Auth::user()->login_as)->get();
+            $data['keuangans'] = Pengadaan::latest()->get();
             $data['years'] = Tahun::all();
+            $date = Carbon::now()->format('Y-m-d');
+
+            if($request->date){
+                $data['keuangans'] = Pengadaan::when($request->date !== Null, function ($q) use ($request) {
+                    return $q->whereDate('created_at', $request->date);
+                }, function($q) use ($date ){
+                    return $q->whereDate('created_at', $date );
+                })->get();
+            }
             return view('Keuangan.Kontrak.pembayaran1',$data);
         }
     
@@ -121,11 +130,16 @@ class KeuanganController extends Controller
             return view('Keuangan.Detail.pengadaan.pengesahan',$data);
         }
 
-        public function index2() 
+        public function index2(Request $request) 
         {
-            $data['title']='DIPA';
-            $data['keuangans'] = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->select('perencanaans.id','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', Auth::user()->login_as)->get();
+            $data['title'] = 'DIPA';
+            $search = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->join('tahuns','perencanaans.tahun_id','=','tahuns.id');;
             $data['years'] = Tahun::all();
+            $data['keuangans'] = $search->select('perencanaans.id','tahuns.years','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->orderBy('perencanaans.updated_at', 'DESC')->get();
+    
+            if ($request->years) {
+                $data['keuangans'] = $search->select('perencanaans.id', 'tahuns.years', 'dokumens.dokumen', 'edisi', 'perencanaans.updated_at', 'tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', $request->years)->orderBy('perencanaans.updated_at', 'DESC')->get();
+            }
             return view('Keuangan.perencanaan.dipa',$data);
         }
 

@@ -8,7 +8,7 @@
   @csrf
   <input type="hidden" name="id" value="{{ $perencanaan->id }}">
   
-  <div class="mb-3 visually-hidden-focusable">
+  <div class="mb-3">
     <label for="tahun" class="form-label">Tahun Pengadaan</label>
     <select class="form-select" name="tahun" aria-label="Default select example" id="tahun" value="">
       @foreach($years as $y)

@@ -21,7 +21,6 @@
         <h3 class="mt-3" ><span class="text-success float:left;">SIM</span><span class="text-primary">PBJ</span></</h3>
       </div>
       <div class="col-4">
-        <h4 class="textt text-end" style="margin-top: 17px;">Data Tahun: {{ Bantuan::get_tahun(Auth::user()->id) }}</h4>
       </div>
       <div class="col-5 text-end" style="margin-top: 13px;">
         <h3 class="me-2 textt">{{ auth()->user()->name }}</h3>
@@ -46,7 +45,7 @@
             function( settings, data, dataIndex ) {
                 var min = minDate.val();
                 var max = maxDate.val();
-                var date = new Date( data[4] );
+                var date = new Date( data[6] );
           
                 if (
                     ( min === null && max === null ) ||

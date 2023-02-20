@@ -18,7 +18,7 @@ use App\Http\Controllers\PesananController;
 */
 
 // route perencanaan
-Route::middleware('auth', 'verified')->group(function ()
+Route::middleware('auth')->group(function ()
 {
     //Dashboard
     Route::get('Dashboard', [RencanaController::class, 'dashboard']);
@@ -73,7 +73,7 @@ Route::middleware('auth', 'verified')->group(function ()
 });
 
 // route PPK
-Route::middleware('auth', 'verified')->group(function ()
+Route::middleware('auth')->group(function ()
 {
     //dashboard
     Route::get('/Dashboard_Pengadaan',[PengadaanController::class, 'dashboard']);
@@ -146,7 +146,7 @@ Route::middleware('auth', 'verified')->group(function ()
 });
 
 // route keuangan
-Route::middleware('auth', 'verified')->group(function ()
+Route::middleware('auth')->group(function ()
 {
     //Dashboard
     Route::get('/Dashboard_Keuangan',[KeuanganController::class, 'dashboard']);
@@ -173,7 +173,7 @@ Route::middleware('auth', 'verified')->group(function ()
 });
 
 // route pejabat pengadaan
-Route::middleware('auth', 'verified')->group(function ()
+Route::middleware('auth')->group(function ()
 {
     //dashboard
     Route::get('Dashboard_pejabatPengadaan', [PesananController::class, 'dashboard']);
@@ -211,19 +211,23 @@ Route::get('/register2', [LoginController::class, 'register2']);
 
 Route::post('/register2', [LoginController::class, 'store']);
 
-Route::get('password.reset', [LoginController::class, 'verifikasi']);
+Route::get('password.forgot', [LoginController::class, 'verifikasi']);
 
-Route::post('password.reset', [LoginController::class, 'verifikasi2'])->name('password.reset');
+Route::post('password.forgot', [LoginController::class, 'verifikasi2'])->name('password_reset');
+
+Route::get('password.reset/{token}', [LoginController::class, 'new_password'])->name('password_forgot');
+
+Route::post('password.reset', [LoginController::class, 'new_password2']);
 
 // Route master admin
-Route::middleware('auth', 'verified')->group(function ()
+Route::middleware('auth')->group(function ()
 {
 
 Route::get('User', [LoginController::class, 'index2']);
 
 Route::get('register', [LoginController::class, 'register']);
 
-Route::post('register', [LoginController::class, 'store']);
+Route::post('register', [LoginController::class, 'store2']);
 
 Route::get('user/hapus/{id}', [LoginController::class, 'delete']);
 

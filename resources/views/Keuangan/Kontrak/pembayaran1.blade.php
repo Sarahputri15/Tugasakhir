@@ -4,7 +4,15 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">{{ $title }}</h1>
 </div>
-<div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+<div class="mb-1" style="float:right; margin-right: 80px">
+  <form action="" method="get">
+    <label for="tahun">Tahun Anggaran:</label> 
+    <input type="date" class="border border-dark-subtle" name="date" id="date" value="{{ Request::get('date') ??date('Y-m-d') }}" style="width:150px; height:31px; border-radius:5px">
+    <button class="border border-success bg-success text-white" type="submit" style="height:31px; border-radius:5px">Filter</button>
+  </form>
+</div>
+<br>
+<div class="justify-content-cennter flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom container-fluid" style="margin-left: -70px">
 <table class="table table-striped table-sm table-bordered" id="myTable">
     <thead>
       <tr>
@@ -18,6 +26,7 @@
         <th scope="col" rowspan="2">Realisasi Pembayaran</th>
         <th scope="col" rowspan="2">SP2D</th>
         <th scope="col" rowspan="2">Dokumen Perpajakan</th>
+        <th scope="col" rowspan="2">Tanggal_update</th>
         <th scope="col" rowspan="2">Action</th>
       </tr>
       <tr>
@@ -49,6 +58,7 @@
         <td>
           <a href="{{ url('/Home/Pembayarankeu1/perpajakan/'.$k->id) }}" class="badge bg-info"><i class="bi bi-eye"></i> Lihat</a>
         </td>
+        <td>{{ $k->created_at->format('d-m-Y') }}</td>
         <td>
           <a href="{{ url('/Home/Pembayarankeu1/Edit/'.$k->id) }}" class="badge bg-warning"><i class="bi bi-pencil"></i> Edit</a>
         </td>

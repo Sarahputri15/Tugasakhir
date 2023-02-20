@@ -13,24 +13,16 @@
     </div>
   </div>
 </div>
-<div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom container-fluid">
-  {{-- 
-  <div class="row mb-2 pb-2 border-bottom">
-    <div class="col-2">
-    </div>
-      <div class="col-md-4">
-        <td>Minimum Tanggal:</td>
-        <td><input type="text" id="min" name="min"></td>
-      </div>
-      <div class="col-md-4">
-        <td>Maximum Tanggal:</td>
-        <td><input type="text" id="max" name="max"></td>
-      </div>
-    <div class="col-3">
-    </div>
-  </div>
-    --}}
-  
+
+<div class="row mb-1 me-0" style="float:right;">
+  <form action="" method="get">
+    <label for="tahun">Tahun Anggaran:</label> 
+    <input type="date" class="border border-dark-subtle" name="date" id="date" value="{{ Request::get('date') ??date('Y-m-d') }}" style="width:150px; height:31px; border-radius:5px">
+    <button class="border border-success bg-success text-white" type="submit" style="height:31px; border-radius:5px">Filter</button>
+  </form>
+</div>
+<br>
+<div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom container-fluid"> 
 <table class="table table-striped table-sm table-bordered" style="font-size: 14px;" id="myTable">
     <thead>
       <tr>
@@ -48,6 +40,7 @@
         <th scope="col" rowspan="2">Realisasi Pembayaran</th>
         <th scope="col" rowspan="2">SP2D</th>
         <th scope="col" rowspan="2">Dokumen Perpajakan</th>
+        <th scope="col" rowspan="2">Tanggal_update</th>
         <th scope="col" rowspan="2">Fitur</th>
       </tr>
       <th scope="col">Awal</th>
@@ -81,6 +74,7 @@
         <td>
             <a href="{{ url('/Home/Pembayaran1/Show2/'.$pembayaran->id) }}" class="badge bg-info"><i class="bi bi-eye"></i> Lihat</a> 
         </td>
+        <td>{{ $pembayaran->created_at->format('d-m-Y') }}</td>
         <td>
           <a href="{{ url('/Home/Pembayaran1/Detail/'.$pembayaran->id) }}" class="badge bg-info"><i class="bi bi-eye"></i> Detail</a>
           <a href="{{ url('/Home/Pembayaran1/Edit/'.$pembayaran->id) }}" class="badge bg-warning"><i class="bi bi-pencil"></i> Edit</span></a>

@@ -9,8 +9,8 @@ a, ul, li{
     z-index: 5;
 }
 
-a:active{
-    color:yellow;
+.active{
+    color:white !important;
 }
 
 

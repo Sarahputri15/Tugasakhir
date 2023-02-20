@@ -7,13 +7,29 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
+            @if(Request::is('Home/DIPA*'))
+
+            <a class="nav-link dropdown-toggle {{Request::is('Home/DIPA*') ?'active':''}}" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
               Perencanaan
             </a>
+            
+            @elseif(Request::is('Home/RKKS*'))
+  
+            <a class="nav-link dropdown-toggle {{Request::is('Home/RKKS*') ?'active':''}}" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
+              Perencanaan
+            </a>
+  
+            @else
+  
+            <a class="nav-link dropdown-toggle {{Request::is('Home/pbj2*') ?'active':''}}" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
+              Perencanaan
+            </a>
+  
+            @endif
             <ul class="dropdown-menu dropdown-menu-dark bg-success">
-              <li><a class="dropdown-item" href="{{ url('/Home/DIPA') }}">DIPA</a></li>
-              <li><a class="dropdown-item" href="{{ url('/Home/RKKS') }}">RKKS</a></li>
-              <li><a class="dropdown-item" href="{{ url('/Home/pbj2') }}">Usulan Pemaketan PBJ</a></li>
+              <li><a class="dropdown-item {{Request::is('Home/DIPA*') ?'active':''}}" href="{{ url('/Home/DIPA') }}">DIPA</a></li>
+              <li><a class="dropdown-item {{Request::is('Home/RKKS*') ?'active':''}}" href="{{ url('/Home/RKKS') }}">RKKS</a></li>
+              <li><a class="dropdown-item {{Request::is('Home/pbj2*') ?'active':''}}" href="{{ url('/Home/pbj2') }}">Usulan Pemaketan PBJ</a></li>
             </ul>
           </li>
         </ul>

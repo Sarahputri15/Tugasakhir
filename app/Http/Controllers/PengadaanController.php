@@ -20,13 +20,13 @@ class PengadaanController extends Controller
     //Halaman dashboard
     public function dashboard() 
     {
-        $sum_pekerjaan = Pengadaan::all()->where('tahun_id', Auth::user()->login_as)->sum('realisasi_pekerjaan');
-        $pekerjaan = Pengadaan::all()->where('tahun_id', Auth::user()->login_as)->count();
+        $sum_pekerjaan = Pengadaan::all()->sum('realisasi_pekerjaan');
+        $pekerjaan = Pengadaan::all()->count();
         $data['pekerjaan'] = $sum_pekerjaan/$pekerjaan;
         if( $sum_pekerjaan == 0 || $pekerjaan == 0 ){
             return $data['pekerjaan'];
         }
-        $pembayaran = pengadaan::all()->where('tahun_id', Auth::user()->login_as);
+        $pembayaran = pengadaan::all();
         $hitung = 0;
         foreach($pembayaran as $p)
         {
@@ -40,23 +40,28 @@ class PengadaanController extends Controller
         }
         //$sum_pembayaran = Pengadaan::all()->sum('realisasi_pembayaran');
         $data['pembayaran'] = $hitung;
-        $data['hitung1'] = Perencanaan::where('dokumen_id','=', 1)->where('tahun_id', Auth::user()->login_as)->count();
-        $data['hitung2'] = Perencanaan::where('dokumen_id','=', 2)->where('tahun_id', Auth::user()->login_as)->count();
-        $data['hitung3'] = Pengadaan::all()->where('tahun_id', Auth::user()->login_as)->count();
-        $data['hitung4'] = Pesanan::all()->where('tahun_id', Auth::user()->login_as)->count();
-        $data['hitung5'] = Pbj::all()->where('tahun_id', Auth::user()->login_as)->count();
-        $data['pengadaan'] = Pengadaan::all()->where('tahun_id', Auth::user()->login_as);
+        $data['hitung1'] = Perencanaan::where('dokumen_id','=', 1)->count();
+        $data['hitung2'] = Perencanaan::where('dokumen_id','=', 2)->count();
+        $data['hitung3'] = Pengadaan::all()->count();
+        $data['hitung4'] = Pesanan::all()->count();
+        $data['hitung5'] = Pbj::all()->count();
+        $data['pengadaan'] = Pengadaan::all();
         $data['current'] = Carbon::now();
         $data['title'] = 'Dashboard';
         return view('.Pengadaan.dashboard.dahboard', $data);
     }
 
     //Halaman DIPA
-    public function index() 
+    public function index(Request $request) 
     {
         $data['title'] = 'DIPA';
-        $data['perencanaan'] = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->select('perencanaans.id','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', Auth::user()->login_as)->get();
+        $search = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->join('tahuns','perencanaans.tahun_id','=','tahuns.id');;
         $data['years'] = Tahun::all();
+        $data['perencanaan'] = $search->select('perencanaans.id','tahuns.years','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 1)->orderBy('perencanaans.updated_at', 'DESC')->get();
+
+        if ($request->years) {
+            $data['perencanaan'] = $search->select('perencanaans.id', 'tahuns.years', 'dokumens.dokumen', 'edisi', 'perencanaans.updated_at', 'tanggal_pengesahan')->where('dokumens.id', '=', 1)->where('tahun_id', $request->years)->orderBy('perencanaans.updated_at', 'DESC')->get();
+        }
         return view('Pengadaan.Perencanaan.Dipa', $data);
     }
 
@@ -69,11 +74,16 @@ class PengadaanController extends Controller
     }
 
     //Halaman RKKS
-    public function index2() 
+    public function index2(Request $request) 
     {
         $data['title'] = 'RKKS';
-        $data['perencanaan'] = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->select('perencanaans.id','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 2)->where('tahun_id', Auth::user()->login_as)->get();
+        $search = Perencanaan::join('dokumens','perencanaans.Dokumen_id','=','dokumens.id')->join('tahuns','perencanaans.tahun_id','=','tahuns.id');;
         $data['years'] = Tahun::all();
+        $data['perencanaan'] = $search->select('perencanaans.id','tahuns.years','dokumens.dokumen','edisi','perencanaans.updated_at','tanggal_pengesahan')->where('dokumens.id', '=', 2)->orderBy('perencanaans.updated_at', 'DESC')->get();
+
+        if ($request->years) {
+            $data['perencanaan'] = $search->select('perencanaans.id', 'tahuns.years', 'dokumens.dokumen', 'edisi', 'perencanaans.updated_at', 'tanggal_pengesahan')->where('dokumens.id', '=', 2)->where('tahun_id', $request->years)->orderBy('perencanaans.updated_at', 'DESC')->get();
+        }
         return view('Pengadaan.Perencanaan.RKKS', $data);
     }
 
@@ -89,7 +99,7 @@ class PengadaanController extends Controller
     public function index5() 
     {
         $data['title'] = 'Daftar Usulan Pemaketan';
-        $data['pbj'] = pbj::latest()->where('tahun_id', Auth::user()->login_as)->get();
+        $data['pbj'] = pbj::latest()->get();
         $data['years'] = Tahun::all();
         return view('Pengadaan.Perencanaan.pbj', $data);
     }
@@ -98,7 +108,7 @@ class PengadaanController extends Controller
     public function create2()
     {
         $data['title'] = 'Usulan Pemaketan PBJ';
-        $data['years'] = Auth::user()->login_as;
+        $data['years'] = Tahun::all();
         return view('Pengadaan.action.create2', $data);
     }
 
@@ -125,7 +135,6 @@ class PengadaanController extends Controller
             $file->move('file_perencanaan', $kak);
         }
         pbj::create([
-            'tahun_id' => $request->tahun,
             'paket' => $request->paket,
             'rup' => $request->rup,
             'mak' => $request->mak,
@@ -180,7 +189,7 @@ class PengadaanController extends Controller
     {
         $data['title'] = 'Usulan Pemaketan PBJ';
         $data['paket'] = pbj::where('id', $id)->first(); 
-        $data['years'] = Auth::user()->login_as;
+        $data['years'] = Tahun::all();
         return view('Pengadaan.action.edit3', $data);
     }
 
@@ -188,7 +197,6 @@ class PengadaanController extends Controller
     public function edit5(Request $request) 
     {
         $pbj = pbj::find($request->id);
-        $pbj->tahun_id = $request->tahun;
         $pbj->paket = $request->paket; 
         $pbj->mak = $request->ak;
         $pbj->pagu = $request->agu;
@@ -227,16 +235,26 @@ class PengadaanController extends Controller
     public function print() 
     {
         $data['title'] = 'Data PBJ';
-        $data['pbj'] = pbj::all()->where('tahun_id', Auth::user()->login_as);
+        $data['pbj'] = pbj::all();
         return view('Pengadaan.Perencanaan.print', $data);
     }
 
     //Halaman persiapan kontrak
-    public function index4() 
+    public function index4(Request $request) 
     {
         $data['title'] = 'Persiapan Kontrak';
-        $data['pembayarans'] = Pengadaan::latest()->where('tahun_id', Auth::user()->login_as)->get();
         $data['years'] = Tahun::all();
+        $data['pembayarans'] = Pengadaan::latest()->get();
+        $date = Carbon::now()->format('Y-m-d');
+
+        if($request->date){
+            $data['pembayarans'] = Pengadaan::when($request->date !== Null, function ($q) use ($request) {
+                return $q->whereDate('created_at', $request->date);
+            }, function($q) use ($date ){
+                return $q->whereDate('created_at', $date );
+            })->get();
+        }
+
         return view('Pengadaan.Kontrak.pembayaran1', $data);
     }
 
@@ -339,7 +357,6 @@ class PengadaanController extends Controller
          }
 
          Pengadaan::create([
-             'tahun_id' => $request->tahun,
              'nomor_kontrak' => $request->nomor,
              'judul' => $request->title,
              'awal' => $request->awal,
@@ -393,7 +410,7 @@ class PengadaanController extends Controller
     //Halaman tambah data
     public function create() {
         $data['title'] = 'Persiapan Kontrak';
-        $data['years'] = Auth::user()->login_as;
+        $data['years'] = Tahun::all();
         return view('Pengadaan.action.create', $data);
     }
 
@@ -402,7 +419,7 @@ class PengadaanController extends Controller
     {
         $data['edit'] = Pengadaan::where('id', $id)->first();
         $data['title'] = 'Persiapan Kontrak';
-        $data['years'] = Auth::user()->login_as;
+        $data['years'] = Tahun::all();
         return view('Pengadaan.action.edit',$data);
     }
 
@@ -410,7 +427,6 @@ class PengadaanController extends Controller
     public function edit3(Request $request)
     {
         $edit = Pengadaan::find($request->id);
-        $edit->tahun_id = $request->tahun;
         $edit->nomor_kontrak = $request->nomor;
         $edit->judul = $request->title;
         $edit->awal = $request->awal;
@@ -537,11 +553,21 @@ class PengadaanController extends Controller
 
 
     //surat pesanan
-    public function index3() 
+    public function index3(Request $request) 
     {
       $data['title'] = 'Surat Pesanan';
-      $data['perencanaan'] = Pesanan::latest()->where('tahun_id', Auth::user()->login_as)->get();
+      $data['perencanaan'] = Pesanan::latest()->get();
       $data['years'] = Tahun::all();
+      $date = Carbon::now()->format('Y-m-d');
+        
+        if($request->date){
+            $data['perencanaan'] = Pesanan::when($request->date !== Null, function ($q) use ($request) {
+                return $q->whereDate('created_at', $request->date);
+            }, function($q) use ($date ){
+                return $q->whereDate('created_at', $date );
+            })->get();
+        }
+
       return view('Pengadaan.Kontrak.pesanan', $data);
     }
     public function detail($id)

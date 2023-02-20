@@ -4,24 +4,18 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom container">
   <h1 class="h2 ">{{ $title }}</h1>
 </div>
+
 <div class="container">
-  <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom table-responsive">
-  {{-- 
-  <div class="row mb-2 pb-2 border-bottom">
-    <div class="col-2">
-    </div>
-      <div class="col-md-4">
-        <td>Minimum Tanggal:</td>
-        <td><input type="text" id="min" name="min"></td>
-      </div>
-      <div class="col-md-4">
-        <td>Maximum Tanggal:</td>
-        <td><input type="text" id="max" name="max"></td>
-      </div>
-    <div class="col-3">
-    </div>
+  <div class="mb-1" style="float:right;">
+    <form action="" method="get">
+      <label for="tahun">Tahun Anggaran:</label> 
+      <input type="date" class="border border-dark-subtle" name="date" id="date" value="{{ Request::get('date') ??date('Y-m-d') }}" style="height:31px; border-radius:5px">
+      <button class="border border-success bg-success text-white" type="submit" style="height:31px; border-radius:5px">Filter</button>
+    </form>
   </div>
-    --}}
+  <br>
+  <br>
+  <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom table-responsive">
   <table class="table table-striped table-sm table-bordered" id="myTable">
       <thead>
         <tr>
@@ -31,6 +25,7 @@
           <th scope="col">Status</th>
           <th scope="col">Surat Pesanan</th>
           <th scope="col">Dokumen Penawaran</th>
+          <th scope="col">Tanggal_update</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -49,6 +44,7 @@
             <a href="{{ url('/Home/pesanan/show/'.$p->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           </td>
           <td><a href="{{ url('/Home/pesanan/show2/'.$p->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a></td>
+          <td>{{ $p->created_at->format('d-m-Y') }}</td>
           <td>
             <a href="{{ url('/Home/pesanan/detail/'.$p->id) }}" class="badge bg-info">Detail</a>
           </td>

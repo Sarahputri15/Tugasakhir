@@ -6,16 +6,6 @@
 </div>
 <form action="{{ url('pesanan/edit') }}" method="post" enctype="multipart/form-data">
   @csrf
-  <input type="hidden" name="id" value="{{ $pesanan->id }}">
-  <div class="mb-3 visually-hidden-focusable">
-      <label for="tahun" class="form-label">Tahun Pengadaan</label>
-      <select class="form-select" name="tahun" aria-label="Default select example" id="tahun">
-        @foreach($years as $y)
-        <option value="{{ $y->id }}" @if($y->id == $pesanan->tahun_id) selected @endif>{{ $y->years }}</option>
-        @endforeach
-      </select>
-    </div>
-
     <div class="mb-3">
       <label for="judul" class="form-label">Judul Pesanan</label>
       <input type="text" class="form-control" id="judul" name="judul" value="{{ $pesanan->judul }}">

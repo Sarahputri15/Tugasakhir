@@ -19,7 +19,8 @@
         <tr>
           <th>1</th>
           <td>{{ $pesanan->judul }}</td>
-          <td>{{ $pesanan->catatan }}</td>
+          <td>{!! $pesanan->catatan !!}</td>
+          
         </tr>
       </tbody>
     </table>

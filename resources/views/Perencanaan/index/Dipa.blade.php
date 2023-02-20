@@ -9,23 +9,20 @@
     <a href="{{ url('/Home/DIPA/Create') }}" class="btn btn-success my-3"><i class="bi bi-plus"></i>Tambah</a>
   </div>
 </div>
+<div class="mb-1" style="float:right">
+    <form action="" method="get">
+      <label for="tahun">Tahun Anggaran:</label> 
+      <select class="border border-dark-subtle" name="years" id="tahun" style="width:150px; height:31px; border-radius:5px">
+        <option value="pilih_tahun">-- Pilih Tahun --</option>
+        @foreach($years as $y)
+        <option value="{{ $y->id }}" {{ Request::get('years') == $y->id ? 'selected':'' }}>{{ $y->years }}</option>
+        @endforeach
+      </select>
+      <button class="border border-success bg-success text-white" type="submit" style="height:31px; border-radius:5px">Filter</button>
+    </form>
+</div>
+<br>
 <div class="justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-  {{-- 
-  <div class="row mb-2 pb-2 border-bottom">
-    <div class="col-2">
-    </div>
-      <div class="col-md-4">
-        <td>Minimum Tanggal:</td>
-        <td><input type="text" id="min" name="min"></td>
-      </div>
-      <div class="col-md-4">
-        <td>Maximum Tanggal:</td>
-        <td><input type="text" id="max" name="max"></td>
-      </div>
-    <div class="col-3">
-    </div>
-  </div>
-    --}}
   <table class="table table-striped table-sm table-bordered" id="myTable">
     <thead>
       <tr>
@@ -34,6 +31,7 @@
         <th scope="col">Edisi</th>
         <th scope="col">Tanggal Upload</th>
         <th scope="col">Tanggal Pengesahan</th>
+        <th scope="col">Tahun Anggaran</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -45,6 +43,7 @@
         <td>{{ $rencana->edisi }}</td>
         <td>{{ $rencana->updated_at }}</td>
         <td>{{ $rencana->tanggal_pengesahan }}</td>
+        <td>{{ $rencana->years}}</td>
         <td>
           <a href="{{ url('/Home/DIPA/show/'.$rencana->id) }}" class="badge bg-info" target="_blank"><i class="bi bi-eye"></i> Lihat</a>
           <a href="{{ url('/Home/DIPA/Edit/'.$rencana->id) }}" class="badge bg-warning"><i class="bi bi-pencil"></i> Edit</span></a>

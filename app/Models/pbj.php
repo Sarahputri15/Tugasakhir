@@ -11,4 +11,14 @@ class pbj extends Model
 
     protected $table = 'pbj';
     protected $guarded = ['id'];
+
+    public function index()
+    {
+        $user = User::first();
+        $newDate = $user->created_at->format('d-m-Y');
+
+        dd($newDate);
+    }
 }
+
+

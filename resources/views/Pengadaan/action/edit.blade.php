@@ -8,12 +8,6 @@
 <form action="{{ url('/Home/Pembayaran1/Edit') }}" method="post" enctype="multipart/form-data"> 
   @csrf
     <input type="hidden" name="id" value="{{ $edit->id }}">
-    <div class="mb-3 visually-hidden-focusable">
-      <label for="tahun" class="form-label">Tahun Pengadaan</label>
-      <select class="form-select" name="tahun" aria-label="Default select example" id="tahun" value="">
-        <option value="{{ $years }}">{{ Bantuan::get_tahun(Auth::user()->id) }}</option>
-      </select>
-    </div>
 
     <div class="mb-3">
       <label for="Judul" class="form-label">Judul</label>

@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item dropdown ">
-            <a class="nav-link " href="{{ url('pesanan') }}">Surat Pesanan</a>
+            <a class="nav-link {{Request::is('pesanan*') ?'active':''}}" href="{{ url('pesanan') }}">Surat Pesanan</a>
           </li>
         </ul>
       </div>
